@@ -90,7 +90,7 @@ const Hero = () => {
               <div className="absolute inset-0 bg-gradient-sunset rounded-3xl transform rotate-3 opacity-20"></div>
               <div className="relative bg-background rounded-3xl p-4 shadow-warm overflow-hidden">
                 <img 
-                  src="/src/assets/delivery-driver.png" 
+                  src="/src/assets/delivery-driver-themed.png" 
                   alt="Delivery driver holding pizza boxes and coffee cups with Hello, Your food is here message"
                   className="w-full h-auto rounded-2xl object-cover"
                 />
