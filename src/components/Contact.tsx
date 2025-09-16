@@ -1,10 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Phone, Mail, MessageSquare, Clock, ArrowRight } from "lucide-react";
-
 const Contact = () => {
-  return (
-    <section id="contact" className="py-20 bg-background">
+  return <section id="contact" className="py-20 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
@@ -31,9 +29,7 @@ const Contact = () => {
                     <div>
                       <h3 className="font-heading font-semibold text-lg text-foreground">Call Us</h3>
                       <p className="text-muted-foreground">Ready to answer your questions</p>
-                      <a href="tel:+1234567890" className="text-primary hover:text-primary-dark transition-colors font-medium">
-                        (123) 456-7890
-                      </a>
+                      <a href="tel:+1234567890" className="text-primary hover:text-primary-dark transition-colors font-medium">512-293-3666</a>
                     </div>
                   </div>
                 </CardContent>
@@ -47,10 +43,8 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="font-heading font-semibold text-lg text-foreground">Email Us</h3>
-                      <p className="text-muted-foreground">Get detailed information</p>
-                      <a href="mailto:info@savorysynergy.com" className="text-primary hover:text-primary-dark transition-colors font-medium">
-                        info@savorysynergy.com
-                      </a>
+                      
+                      <a href="mailto:info@savorysynergy.com" className="text-primary hover:text-primary-dark transition-colors font-medium">savorysynergy@gmail.com</a>
                     </div>
                   </div>
                 </CardContent>
@@ -123,8 +117,6 @@ const Contact = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Contact;

@@ -1,19 +1,13 @@
 import { Phone, Mail, MapPin } from "lucide-react";
 import logo from "@/assets/savory-synergy-logo.png";
-
 const Footer = () => {
-  return (
-    <footer className="bg-warm-brown text-warm-cream">
+  return <footer className="bg-warm-brown text-warm-cream">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
-              <img 
-                src={logo} 
-                alt="Savory Synergy" 
-                className="h-10 w-10 object-contain"
-              />
+              <img src={logo} alt="Savory Synergy" className="h-10 w-10 object-contain" />
               <div className="font-heading font-bold text-xl">
                 Savory Synergy
               </div>
@@ -67,21 +61,15 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <Phone className="h-4 w-4 text-primary flex-shrink-0" />
-                <a href="tel:+1234567890" className="text-warm-cream/80 hover:text-warm-cream transition-colors text-sm">
-                  (123) 456-7890
-                </a>
+                <a href="tel:+1234567890" className="text-warm-cream/80 hover:text-warm-cream transition-colors text-sm">512-293-3666</a>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-4 w-4 text-primary flex-shrink-0" />
-                <a href="mailto:info@savorysynergy.com" className="text-warm-cream/80 hover:text-warm-cream transition-colors text-sm">
-                  info@savorysynergy.com
-                </a>
+                <a href="mailto:info@savorysynergy.com" className="text-warm-cream/80 hover:text-warm-cream transition-colors text-sm">savorysynergy@gmail.com</a>
               </div>
               <div className="flex items-start space-x-3">
                 <MapPin className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                <span className="text-warm-cream/80 text-sm">
-                  Serving restaurants nationwide
-                </span>
+                <span className="text-warm-cream/80 text-sm">Serving restaurants in Georgia</span>
               </div>
             </div>
           </div>
@@ -89,9 +77,7 @@ const Footer = () => {
 
         <div className="border-t border-warm-cream/20 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-warm-cream/60 text-sm">
-              © 2024 Savory Synergy. All rights reserved.
-            </p>
+            <p className="text-warm-cream/60 text-sm">© 2025 Savory Synergy. All rights reserved.</p>
             <div className="flex space-x-6">
               <a href="#" className="text-warm-cream/60 hover:text-warm-cream transition-colors text-sm">
                 Privacy Policy
@@ -103,8 +89,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
