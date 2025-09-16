@@ -1,9 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, TrendingDown, Users, Clock } from "lucide-react";
-
 const Hero = () => {
-  return (
-    <section id="home" className="relative min-h-[90vh] flex items-center bg-gradient-warm overflow-hidden">
+  return <section id="home" className="relative min-h-[90vh] flex items-center bg-gradient-warm overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2260%22%20height=%2260%22%20viewBox=%220%200%2060%2060%22%20xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg%20fill=%22none%22%20fill-rule=%22evenodd%22%3E%3Cg%20fill=%22%23ff6b35%22%20fill-opacity=%220.05%22%3E%3Ccircle%20cx=%2230%22%20cy=%2230%22%20r=%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
       
@@ -55,21 +53,12 @@ const Hero = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button 
-                size="lg" 
-                className="bg-gradient-primary hover:shadow-warm transition-all font-semibold text-lg px-8 py-6"
-              >
+              <Button size="lg" className="bg-gradient-primary hover:shadow-warm transition-all font-semibold text-lg px-8 py-6">
                 Get Started Today
                 <ArrowRight className="h-5 w-5 ml-2" />
               </Button>
               
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold text-lg px-8 py-6"
-              >
-                Schedule a Demo
-              </Button>
+              
             </div>
 
             {/* Trust indicators */}
@@ -89,18 +78,12 @@ const Hero = () => {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-sunset rounded-3xl transform rotate-3 opacity-20"></div>
               <div className="relative bg-background rounded-3xl p-4 shadow-warm overflow-hidden">
-                <img 
-                  src="/src/assets/delivery-driver-themed.png" 
-                  alt="Delivery driver holding pizza boxes and coffee cups with Hello, Your food is here message"
-                  className="w-full h-auto rounded-2xl object-cover"
-                />
+                <img src="/src/assets/delivery-driver-themed.png" alt="Delivery driver holding pizza boxes and coffee cups with Hello, Your food is here message" className="w-full h-auto rounded-2xl object-cover" />
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;

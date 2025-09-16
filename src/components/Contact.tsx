@@ -51,18 +51,7 @@ const Contact = () => {
               </Card>
 
               <Card className="hover:shadow-warm transition-all duration-300 border-border/50">
-                <CardContent className="p-6">
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-                      <Clock className="h-6 w-6 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-heading font-semibold text-lg text-foreground">Business Hours</h3>
-                      <p className="text-muted-foreground">Monday - Friday: 8AM - 8PM</p>
-                      <p className="text-muted-foreground">Saturday - Sunday: 10AM - 6PM</p>
-                    </div>
-                  </div>
-                </CardContent>
+                
               </Card>
             </div>
 
@@ -77,9 +66,7 @@ const Contact = () => {
                   <h3 className="text-2xl font-heading font-bold text-foreground mb-4">
                     Start Saving Today
                   </h3>
-                  <p className="text-muted-foreground mb-6">
-                    Join hundreds of restaurants already saving money with our delivery network.
-                  </p>
+                  <p className="text-muted-foreground mb-6">Join the restaurants already saving money with our delivery network.</p>
                 </div>
 
                 <div className="space-y-4">
@@ -111,9 +98,7 @@ const Contact = () => {
             <p className="text-muted-foreground mb-4">
               We're here to explain exactly how you can maintain your current workflow while saving money.
             </p>
-            <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-              Request Demo
-            </Button>
+            
           </div>
         </div>
       </div>
