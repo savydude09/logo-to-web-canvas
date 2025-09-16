@@ -75,10 +75,7 @@ const Contact = () => {
                     <ArrowRight className="h-5 w-5 ml-2" />
                   </Button>
                   
-                  <Button variant="outline" size="lg" className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-                    <Phone className="h-5 w-5 mr-2" />
-                    Call Now: (123) 456-7890
-                  </Button>
+                  
                 </div>
 
                 <div className="pt-4 border-t border-border/20">
