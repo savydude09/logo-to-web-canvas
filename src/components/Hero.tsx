@@ -88,28 +88,12 @@ const Hero = () => {
           <div className="relative lg:order-first">
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-sunset rounded-3xl transform rotate-3 opacity-20"></div>
-              <div className="relative bg-background rounded-3xl p-8 shadow-warm">
-                <div className="text-center space-y-6">
-                  <div className="w-20 h-20 bg-gradient-primary rounded-2xl mx-auto flex items-center justify-center shadow-glow">
-                    <TrendingDown className="h-10 w-10 text-primary-foreground" />
-                  </div>
-                  
-                  <div>
-                    <div className="text-4xl font-heading font-bold text-foreground mb-2">50%</div>
-                    <div className="text-muted-foreground">Average savings on delivery costs</div>
-                  </div>
-                  
-                  <div className="grid grid-cols-2 gap-4 pt-4">
-                    <div className="text-center p-4 bg-warm-cream rounded-xl">
-                      <div className="text-2xl font-bold text-foreground">500+</div>
-                      <div className="text-sm text-muted-foreground">Restaurants</div>
-                    </div>
-                    <div className="text-center p-4 bg-warm-cream rounded-xl">
-                      <div className="text-2xl font-bold text-foreground">1000+</div>
-                      <div className="text-sm text-muted-foreground">Drivers</div>
-                    </div>
-                  </div>
-                </div>
+              <div className="relative bg-background rounded-3xl p-4 shadow-warm overflow-hidden">
+                <img 
+                  src="/src/assets/delivery-driver.png" 
+                  alt="Delivery driver holding pizza boxes and coffee cups with Hello, Your food is here message"
+                  className="w-full h-auto rounded-2xl object-cover"
+                />
               </div>
             </div>
           </div>
