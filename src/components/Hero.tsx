@@ -70,6 +70,7 @@ const Hero = () => {
                 <div className="text-xl font-bold text-foreground">GrubHub</div>
                 <div className="text-xl font-bold text-foreground">ChowNow</div>
                 <div className="text-xl font-bold text-foreground">Slice</div>
+                <div className="text-xl font-bold text-foreground">Toast</div>
               </div>
             </div>
           </div>
