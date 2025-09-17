@@ -8,8 +8,9 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
               <img src={logo} alt="Savory Synergy" className="h-10 w-10 object-contain" />
-              <div className="font-heading font-bold text-xl">
-                Savory Synergy
+              <div className="font-logo font-semibold text-xl">
+                <span className="bg-gradient-sunset bg-clip-text text-transparent">Savory</span>{" "}
+                <span className="text-warm-cream">Synergy</span>
               </div>
             </div>
             <p className="text-warm-cream/80 text-sm leading-relaxed">
