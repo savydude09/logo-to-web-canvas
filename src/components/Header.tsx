@@ -19,7 +19,7 @@ const Header = () => {
               alt="Savory Synergy" 
               className="h-16 w-16 lg:h-20 lg:w-20 object-contain drop-shadow-lg"
             />
-            <div className="font-heading font-bold text-2xl lg:text-3xl text-foreground tracking-wide">
+            <div className="font-logo font-semibold text-2xl lg:text-3xl tracking-wide transform transition-all hover:scale-105">
               <span className="bg-gradient-sunset bg-clip-text text-transparent">Savory</span>{" "}
               <span className="text-foreground">Synergy</span>
             </div>

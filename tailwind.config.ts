@@ -16,6 +16,7 @@ export default {
       fontFamily: {
         heading: ['var(--font-heading)'],
         body: ['var(--font-body)'],
+        logo: ['Caveat', 'cursive'],
       },
       colors: {
         border: "hsl(var(--border))",
