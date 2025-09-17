@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, TrendingDown, Users, Clock } from "lucide-react";
+import driverImage from "@/assets/delivery-driver-themed.png";
 const Hero = () => {
   return <section id="home" className="relative min-h-[90vh] flex items-center bg-gradient-warm overflow-hidden">
       {/* Decorative elements */}
@@ -78,7 +79,16 @@ const Hero = () => {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-sunset rounded-3xl transform rotate-3 opacity-20"></div>
               <div className="relative bg-background rounded-3xl p-4 shadow-warm overflow-hidden">
-                <img src="/src/assets/delivery-driver-themed.png" alt="Delivery driver holding pizza boxes and coffee cups with Hello, Your food is here message" className="w-full h-auto rounded-2xl object-cover" />
+                <img
+                  src={driverImage}
+                  alt="Delivery driver holding pizza boxes and coffee cups with Hello, Your food is here message"
+                  className="w-full h-auto rounded-2xl object-cover"
+                  decoding="async"
+                  fetchPriority="high"
+                  onError={(e) => {
+                    e.currentTarget.src = '/placeholder.svg';
+                  }}
+                />
               </div>
             </div>
           </div>
