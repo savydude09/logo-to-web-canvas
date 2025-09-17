@@ -11,16 +11,17 @@ const Header = () => {
   return (
     <header className="bg-background/95 backdrop-blur-sm border-b border-border sticky top-0 z-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+        <div className="flex items-center justify-between h-20 lg:h-24">
           {/* Logo */}
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-4">
             <img 
               src={logo} 
               alt="Savory Synergy" 
-              className="h-10 w-10 lg:h-12 lg:w-12 object-contain"
+              className="h-16 w-16 lg:h-20 lg:w-20 object-contain drop-shadow-lg"
             />
-            <div className="font-heading font-bold text-xl lg:text-2xl text-foreground">
-              Savory Synergy
+            <div className="font-heading font-bold text-2xl lg:text-3xl text-foreground tracking-wide">
+              <span className="bg-gradient-sunset bg-clip-text text-transparent">Savory</span>{" "}
+              <span className="text-foreground">Synergy</span>
             </div>
           </div>
 
