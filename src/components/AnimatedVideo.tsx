@@ -78,7 +78,7 @@ const voiceOverScript = [
   },
   {
     scene: 1,
-    text: "Right now, platforms like DoorDash and GrubHub charge you 30% in total fees - that's 15% for marketing plus 15% for delivery. With Savory Synergy, you only pay 15% marketing commission and handle deliveries with your own drivers, saving you thousands every month.",
+    text: "Right now, platforms like DoorDash and GrubHub charge you 30% in total fees - that's 15% for marketing plus 15% for delivery. With Savory Synergy, you keep using their platform for orders but fulfill deliveries through our lower-cost network, reducing your total commission by up to 50%.",
     duration: 8000
   },
   {
@@ -93,7 +93,7 @@ const voiceOverScript = [
   },
   {
     scene: 4,
-    text: "Ready to save 50% on delivery costs and take control of your delivery operations? Get started today and join hundreds of restaurants already saving thousands.",
+    text: "Ready to reduce your delivery commission by up to 50% and take control of your delivery operations? Get started today and join hundreds of restaurants already saving thousands.",
     duration: 5000
   }
 ];
