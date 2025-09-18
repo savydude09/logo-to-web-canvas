@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, DollarSign, Users, MapPin, Volume2, VolumeX, Play, Pause } from "lucide-react";
+import { CheckCircle, DollarSign, Users, MapPin, Volume2, VolumeX, Play, Pause, ChevronLeft, ChevronRight } from "lucide-react";
 
 // Animated Character Components
 const AnimatedDeliveryDriver = ({ className = "", delay = 0 }: { className?: string; delay?: number }) => (
@@ -67,7 +67,7 @@ const AnimatedCustomer = ({ className = "", delay = 0 }: { className?: string; d
   </div>
 );
 
-// Voice over script
+// Voice over script (removed key benefits scene)
 const voiceOverScript = [
   {
     scene: 0,
@@ -86,11 +86,6 @@ const voiceOverScript = [
   },
   {
     scene: 3,
-    text: "The benefits are clear: 200% more orders guaranteed, full control over your delivery area, the ability to handle orders from your own website, and access to our trusted driver network.",
-    duration: 10000
-  },
-  {
-    scene: 4,
     text: "Ready to reduce your delivery commission by up to 50% and take control of your delivery operations? Get started today and join hundreds of restaurants already saving thousands.",
     duration: 5000
   }
@@ -114,8 +109,7 @@ const AnimatedVideo = () => {
     { id: 0, duration: 4000, name: "intro" },
     { id: 1, duration: 12000, name: "comparison" },
     { id: 2, duration: 15000, name: "process" },
-    { id: 3, duration: 12000, name: "benefits" },
-    { id: 4, duration: 6000, name: "cta" }
+    { id: 3, duration: 6000, name: "cta" }
   ];
 
   // Advance to next scene
@@ -220,6 +214,26 @@ const AnimatedVideo = () => {
 
   const toggleAudio = () => {
     setAudioEnabled(!audioEnabled);
+  };
+
+  const goToPreviousScene = () => {
+    if (currentScene > 0) {
+      setIsPlaying(false);
+      if (typeof window !== 'undefined' && window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
+      setCurrentScene(currentScene - 1);
+    }
+  };
+
+  const goToNextScene = () => {
+    if (currentScene < scenes.length - 1) {
+      setIsPlaying(false);
+      if (typeof window !== 'undefined' && window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
+      setCurrentScene(currentScene + 1);
+    }
   };
 
   return (
@@ -327,40 +341,8 @@ const AnimatedVideo = () => {
           </div>
         )}
 
-        {/* Scene 3: Benefits */}
+        {/* Scene 3: Call to Action */}
         {currentScene === 3 && (
-          <div className="absolute inset-0 p-8 bg-gradient-sunset">
-            <h2 className="text-2xl font-bold text-center mb-8 text-white">Key Benefits</h2>
-            <div className="grid grid-cols-2 gap-6">
-              <div className={`bg-white/10 backdrop-blur-sm p-6 rounded-lg transition-all duration-1000 ${isPlaying ? 'animate-fade-in' : ''}`}>
-                <DollarSign className="text-white mb-3" size={32} />
-                <h3 className="text-white font-semibold mb-2">200% More Orders</h3>
-                <p className="text-white/80 text-sm">Guaranteed order increase with our network</p>
-              </div>
-              
-              <div className={`bg-white/10 backdrop-blur-sm p-6 rounded-lg transition-all duration-1000 delay-500 ${isPlaying ? 'animate-fade-in' : ''}`}>
-                <MapPin className="text-white mb-3" size={32} />
-                <h3 className="text-white font-semibold mb-2">Control Delivery Area</h3>
-                <p className="text-white/80 text-sm">Set your own delivery boundaries</p>
-              </div>
-              
-              <div className={`bg-white/10 backdrop-blur-sm p-6 rounded-lg transition-all duration-1000 delay-1000 ${isPlaying ? 'animate-fade-in' : ''}`}>
-                <CheckCircle className="text-white mb-3" size={32} />
-                <h3 className="text-white font-semibold mb-2">Handle Own Orders</h3>
-                <p className="text-white/80 text-sm">Process orders from your website/POS</p>
-              </div>
-              
-              <div className={`bg-white/10 backdrop-blur-sm p-6 rounded-lg transition-all duration-1000 delay-1500 ${isPlaying ? 'animate-fade-in' : ''}`}>
-                <Users className="text-white mb-3" size={32} />
-                <h3 className="text-white font-semibold mb-2">Trusted Network</h3>
-                <p className="text-white/80 text-sm">Reliable drivers you can count on</p>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Scene 4: Call to Action */}
-        {currentScene === 4 && (
           <div className="absolute inset-0 flex items-center justify-center bg-gradient-primary">
             <div className={`text-center transition-all duration-1000 ${isPlaying ? 'animate-scale-in' : ''}`}>
               <h2 className="text-3xl font-bold text-white mb-6">Ready to Save Up to 50%?</h2>
@@ -374,6 +356,29 @@ const AnimatedVideo = () => {
             </div>
           </div>
         )}
+
+        {/* Navigation Controls */}
+        <div className="absolute bottom-4 left-4 space-x-2">
+          <Button 
+            onClick={goToPreviousScene}
+            variant="outline" 
+            size="sm"
+            className="bg-white/20 border-white/30 text-white hover:bg-white/30"
+            disabled={currentScene === 0}
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </Button>
+          
+          <Button 
+            onClick={goToNextScene}
+            variant="outline" 
+            size="sm"
+            className="bg-white/20 border-white/30 text-white hover:bg-white/30"
+            disabled={currentScene === scenes.length - 1}
+          >
+            <ChevronRight className="h-4 w-4" />
+          </Button>
+        </div>
 
         {/* Control Buttons */}
         <div className="absolute bottom-4 right-4 space-x-2">
