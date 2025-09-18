@@ -81,7 +81,7 @@ const voiceOverScript = [
   },
   {
     scene: 2,
-    text: "Here's how it works: Your customer places an order through DoorDash, GrubHub, your website or POS system. Your restaurant receives and prepares it, then our partner network of drivers pick up and deliver while you keep more money in your pocket.",
+    text: "Here's how it works: Your customer places an order through DoorDash, GrubHub, your website or POS system for delivery and we get that order in our system at the same time as well. Your restaurant receives and prepares it, then our partner network of drivers pick up and deliver while you keep more money in your pocket.",
     duration: 12000
   },
   {
