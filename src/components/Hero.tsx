@@ -21,7 +21,7 @@ const Hero = () => {
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-foreground leading-tight">
                 Reduce Your{" "}
                 <span className="bg-gradient-sunset bg-clip-text text-transparent">
-                  Delivery Costs
+                  Delivery Commissions
                 </span>{" "}
                 by 50%
               </h1>
