@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { CheckCircle, DollarSign, Users, MapPin, Volume2, VolumeX } from "lucide-react";
+import { CheckCircle, DollarSign, Users, MapPin, Volume2, VolumeX, Play, Pause } from "lucide-react";
 
 // Animated Character Components
 const AnimatedDeliveryDriver = ({ className = "", delay = 0 }: { className?: string; delay?: number }) => (
@@ -101,10 +99,15 @@ const voiceOverScript = [
 const AnimatedVideo = () => {
   const [currentScene, setCurrentScene] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [apiKey, setApiKey] = useState("");
-  const [showApiInput, setShowApiInput] = useState(false);
   const [audioEnabled, setAudioEnabled] = useState(false);
-  const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null);
+  const [isVoiceAvailable, setIsVoiceAvailable] = useState(false);
+
+  // Check if speech synthesis is available
+  useEffect(() => {
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      setIsVoiceAvailable(true);
+    }
+  }, []);
 
   const scenes = [
     { id: 0, duration: 3000, name: "intro" },
@@ -114,54 +117,36 @@ const AnimatedVideo = () => {
     { id: 4, duration: 5000, name: "cta" }
   ];
 
-  // Generate voice over audio
-  const generateVoiceOver = async (text: string): Promise<string | null> => {
-    if (!apiKey) return null;
-    
-    try {
-      const response = await fetch('https://api.elevenlabs.io/v1/text-to-speech/9BWtsMINqrJLrRacOk9x', {
-        method: 'POST',
-        headers: {
-          'Accept': 'audio/mpeg',
-          'Content-Type': 'application/json',
-          'xi-api-key': apiKey
-        },
-        body: JSON.stringify({
-          text,
-          model_id: 'eleven_multilingual_v2',
-          voice_settings: {
-            stability: 0.5,
-            similarity_boost: 0.5
-          }
-        })
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to generate audio');
-      }
-
-      const audioBlob = await response.blob();
-      return URL.createObjectURL(audioBlob);
-    } catch (error) {
-      console.error('Error generating voice over:', error);
-      return null;
-    }
-  };
-
-  // Play voice over for current scene
-  const playVoiceOver = async (sceneIndex: number) => {
-    if (!audioEnabled || !apiKey) return;
+  // Play voice over using Web Speech API
+  const playVoiceOver = (sceneIndex: number) => {
+    if (!audioEnabled || !isVoiceAvailable || typeof window === 'undefined') return;
     
     const script = voiceOverScript[sceneIndex];
     if (!script) return;
 
+    // Stop any existing speech
+    window.speechSynthesis.cancel();
+
     try {
-      const audioUrl = await generateVoiceOver(script.text);
-      if (audioUrl) {
-        const audio = new Audio(audioUrl);
-        setCurrentAudio(audio);
-        audio.play();
+      const utterance = new SpeechSynthesisUtterance(script.text);
+      
+      // Configure voice settings
+      utterance.rate = 0.9; // Slightly slower for clarity
+      utterance.pitch = 1.0;
+      utterance.volume = 1.0;
+      
+      // Try to use a more natural voice if available
+      const voices = window.speechSynthesis.getVoices();
+      const preferredVoice = voices.find(voice => 
+        voice.name.includes('Google') || 
+        voice.name.includes('Microsoft') ||
+        voice.lang === 'en-US'
+      );
+      if (preferredVoice) {
+        utterance.voice = preferredVoice;
       }
+
+      window.speechSynthesis.speak(utterance);
     } catch (error) {
       console.error('Error playing voice over:', error);
     }
@@ -186,12 +171,11 @@ const AnimatedVideo = () => {
 
     return () => {
       clearTimeout(timer);
-      if (currentAudio) {
-        currentAudio.pause();
-        setCurrentAudio(null);
+      if (typeof window !== 'undefined' && window.speechSynthesis) {
+        window.speechSynthesis.cancel();
       }
     };
-  }, [currentScene, isPlaying, audioEnabled, apiKey]);
+  }, [currentScene, isPlaying, audioEnabled, scenes]);
 
   const startAnimation = () => {
     setIsPlaying(true);
@@ -201,60 +185,17 @@ const AnimatedVideo = () => {
   const stopAnimation = () => {
     setIsPlaying(false);
     setCurrentScene(0);
-    if (currentAudio) {
-      currentAudio.pause();
-      setCurrentAudio(null);
+    if (typeof window !== 'undefined' && window.speechSynthesis) {
+      window.speechSynthesis.cancel();
     }
   };
 
   const toggleAudio = () => {
-    if (!audioEnabled && !apiKey) {
-      setShowApiInput(true);
-    } else {
-      setAudioEnabled(!audioEnabled);
-    }
+    setAudioEnabled(!audioEnabled);
   };
 
   return (
     <div className="w-full max-w-4xl mx-auto space-y-4">
-      {/* API Key Input */}
-      {showApiInput && (
-        <Card className="p-4 bg-primary/5 border-primary/20">
-          <div className="space-y-3">
-            <Label htmlFor="apiKey" className="text-sm font-medium">
-              ElevenLabs API Key (for voice over)
-            </Label>
-            <div className="flex gap-2">
-              <Input
-                id="apiKey"
-                type="password"
-                placeholder="Enter your ElevenLabs API key"
-                value={apiKey}
-                onChange={(e) => setApiKey(e.target.value)}
-                className="flex-1"
-              />
-              <Button 
-                onClick={() => {
-                  if (apiKey) {
-                    setAudioEnabled(true);
-                    setShowApiInput(false);
-                  }
-                }}
-                disabled={!apiKey}
-              >
-                Enable Audio
-              </Button>
-            </div>
-            <p className="text-xs text-muted-foreground">
-              Get your API key from{" "}
-              <a href="https://elevenlabs.io" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                elevenlabs.io
-              </a>
-            </p>
-          </div>
-        </Card>
-      )}
-
       <Card className="relative overflow-hidden bg-gradient-primary border-0 h-96">
         {/* Scene 0: Intro */}
         {currentScene === 0 && (
@@ -264,7 +205,7 @@ const AnimatedVideo = () => {
                 <span className="bg-gradient-sunset bg-clip-text text-transparent">Savory</span>{" "}
                 <span className="text-warm-cream">Synergy</span>
               </h1>
-              <p className="text-xl text-white/90">Save Up to 50% on Delivery Costs</p>
+              <p className="text-xl text-white/90">Save Up to 50% on Delivery Commissions</p>
             </div>
           </div>
         )}
@@ -272,7 +213,7 @@ const AnimatedVideo = () => {
         {/* Scene 1: Comparison */}
         {currentScene === 1 && (
           <div className="absolute inset-0 p-8 bg-gradient-warm">
-            <h2 className="text-2xl font-bold text-center mb-8 text-warm-brown">Cost Comparison</h2>
+            <h2 className="text-2xl font-bold text-center mb-8 text-warm-brown">Commission Comparison</h2>
             <div className="grid grid-cols-2 gap-8">
               {/* DoorDash/GrubHub Side */}
               <div className={`space-y-4 transition-all duration-1000 ${isPlaying ? 'animate-slide-in-right' : ''}`}>
@@ -289,10 +230,10 @@ const AnimatedVideo = () => {
                 </div>
               </div>
 
-              {/* Your Drivers Side */}
+              {/* Savory Synergy Side */}
               <div className={`space-y-4 transition-all duration-1000 delay-500 ${isPlaying ? 'animate-slide-in-right' : ''}`}>
                 <div className="text-center">
-                  <h3 className="text-lg font-semibold text-warm-brown mb-2">With Your Drivers</h3>
+                  <h3 className="text-lg font-semibold text-warm-brown mb-2">With Savory Synergy</h3>
                   <AnimatedDeliveryDriver className="mx-auto mb-4 text-primary" delay={1000} />
                   <div className="w-16 h-16 mx-auto bg-primary rounded-full flex items-center justify-center mb-4">
                     <CheckCircle className="text-white" size={32} />
@@ -394,7 +335,7 @@ const AnimatedVideo = () => {
         {currentScene === 4 && (
           <div className="absolute inset-0 flex items-center justify-center bg-gradient-primary">
             <div className={`text-center transition-all duration-1000 ${isPlaying ? 'animate-scale-in' : ''}`}>
-              <h2 className="text-3xl font-bold text-white mb-6">Ready to Save 50%?</h2>
+              <h2 className="text-3xl font-bold text-white mb-6">Ready to Save Up to 50%?</h2>
               <Button 
                 size="lg" 
                 className="bg-white text-primary hover:bg-white/90 text-lg px-8 py-6"
@@ -413,26 +354,27 @@ const AnimatedVideo = () => {
             variant="outline" 
             size="sm"
             className="bg-white/20 border-white/30 text-white hover:bg-white/30"
+            disabled={!isVoiceAvailable}
           >
-            {audioEnabled ? <Volume2 size={16} /> : <VolumeX size={16} />}
+            {audioEnabled ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
           </Button>
-          {!isPlaying ? (
-            <Button onClick={startAnimation} variant="outline" className="bg-white/20 border-white/30 text-white hover:bg-white/30">
-              ▶ Play
-            </Button>
-          ) : (
-            <Button onClick={stopAnimation} variant="outline" className="bg-white/20 border-white/30 text-white hover:bg-white/30">
-              ⏹ Stop
-            </Button>
-          )}
+          
+          <Button 
+            onClick={isPlaying ? stopAnimation : startAnimation}
+            variant="outline" 
+            size="sm"
+            className="bg-white/20 border-white/30 text-white hover:bg-white/30"
+          >
+            {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+          </Button>
         </div>
 
         {/* Progress Bar */}
         <div className="absolute bottom-0 left-0 w-full h-1 bg-white/20">
           <div 
-            className="h-full bg-white transition-all duration-300"
+            className="h-full bg-white transition-all duration-300" 
             style={{ 
-              width: isPlaying ? `${((currentScene + 1) / scenes.length) * 100}%` : '0%'
+              width: `${((currentScene + 1) / scenes.length) * 100}%` 
             }}
           />
         </div>
@@ -443,6 +385,15 @@ const AnimatedVideo = () => {
         <Card className="p-4 bg-muted/50">
           <p className="text-sm text-muted-foreground italic">
             "{voiceOverScript[currentScene]?.text}"
+          </p>
+        </Card>
+      )}
+
+      {/* Audio Info */}
+      {!isVoiceAvailable && (
+        <Card className="p-3 bg-muted/50">
+          <p className="text-xs text-muted-foreground text-center">
+            Text-to-speech not available in this browser
           </p>
         </Card>
       )}
