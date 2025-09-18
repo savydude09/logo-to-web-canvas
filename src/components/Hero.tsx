@@ -65,12 +65,12 @@ const Hero = () => {
             {/* Trust indicators */}
             <div className="pt-8">
               <p className="text-sm text-muted-foreground mb-4">Trusted by restaurants working with:</p>
-              <div className="flex flex-wrap items-center gap-6 opacity-70">
-                <div className="text-xl font-bold text-foreground hover:opacity-100 transition-opacity">DoorDash</div>
-                <div className="text-xl font-bold text-foreground hover:opacity-100 transition-opacity">GrubHub</div>
-                <div className="text-xl font-bold text-foreground hover:opacity-100 transition-opacity">ChowNow</div>
-                <div className="text-xl font-bold text-foreground hover:opacity-100 transition-opacity">Slice</div>
-                <div className="text-xl font-bold text-foreground hover:opacity-100 transition-opacity">Toast</div>
+              <div className="flex flex-wrap items-center gap-6 opacity-80">
+                <div className="text-xl font-bold hover:opacity-100 transition-opacity" style={{ color: '#FF3008' }}>DoorDash</div>
+                <div className="text-xl font-bold hover:opacity-100 transition-opacity" style={{ color: '#F63440' }}>GrubHub</div>
+                <div className="text-xl font-bold hover:opacity-100 transition-opacity" style={{ color: '#0066CC' }}>ChowNow</div>
+                <div className="text-xl font-bold hover:opacity-100 transition-opacity" style={{ color: '#E31837' }}>Slice</div>
+                <div className="text-xl font-bold hover:opacity-100 transition-opacity" style={{ color: '#007A5E' }}>Toast</div>
               </div>
             </div>
           </div>
