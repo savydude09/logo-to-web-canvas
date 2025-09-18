@@ -76,7 +76,7 @@ const voiceOverScript = [
   },
   {
     scene: 1,
-    text: "Right now, platforms like DoorDash and GrubHub charge you 30% in total fees - that's 15% for marketing plus 15% for delivery. With Savory Synergy, you keep using their platform for orders but fulfill deliveries through our lower-cost network, reducing your total commission by up to 50%.",
+    text: "Right now, platforms like DoorDash and GrubHub charge you 30% in total fees - that's 15% for marketing plus 15% for delivery. With Savory Synergy, you keep receiving orders from these apps, your website, and your POS system, but fulfill deliveries through our lower-cost network, reducing your total commission by up to 50%.",
     duration: 8000
   },
   {
@@ -86,7 +86,7 @@ const voiceOverScript = [
   },
   {
     scene: 3,
-    text: "Ready to reduce your delivery commission by up to 50% and take control of your delivery operations? Get started today and join hundreds of restaurants already saving thousands.",
+    text: "Ready to reduce your delivery commission by up to 50% and take control of your delivery operations? Get started today and join restaurants saving thousands.",
     duration: 5000
   }
 ];
@@ -352,7 +352,7 @@ const AnimatedVideo = () => {
               >
                 Get Started Today
               </Button>
-              <p className="text-white/80 mt-4">Join hundreds of restaurants saving thousands</p>
+              <p className="text-white/80 mt-4">Join restaurants saving thousands</p>
             </div>
           </div>
         )}
