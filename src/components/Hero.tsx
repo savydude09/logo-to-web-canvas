@@ -104,12 +104,6 @@ const Hero = () => {
                     e.currentTarget.src = '/placeholder.svg';
                   }}
                 />
-                <div className="absolute bottom-6 left-6 right-6 bg-background/95 backdrop-blur-sm rounded-xl p-3 border border-primary/20">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-sm font-medium text-foreground">Driver En Route</span>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
