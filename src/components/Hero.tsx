@@ -70,7 +70,7 @@ const Hero = () => {
                 <div className="text-xl font-bold hover:opacity-100 transition-opacity" style={{ color: '#F63440' }}>GrubHub</div>
                 <div className="text-xl font-bold hover:opacity-100 transition-opacity" style={{ color: '#0066CC' }}>ChowNow</div>
                 <div className="text-xl font-bold hover:opacity-100 transition-opacity" style={{ color: '#E31837' }}>Slice</div>
-                <div className="text-xl font-bold hover:opacity-100 transition-opacity" style={{ color: '#007A5E' }}>Toast</div>
+                <div className="text-xl font-bold hover:opacity-100 transition-opacity" style={{ color: '#FF6B35' }}>Toast</div>
               </div>
             </div>
           </div>
