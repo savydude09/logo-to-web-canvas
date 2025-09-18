@@ -67,9 +67,9 @@ const Hero = () => {
               <p className="text-sm text-muted-foreground mb-4">Trusted by restaurants working with:</p>
               <div className="flex flex-wrap items-center gap-6 opacity-80">
                 <div className="text-xl font-bold hover:opacity-100 transition-opacity" style={{ color: '#FF3008' }}>DoorDash</div>
-                <div className="text-xl font-bold hover:opacity-100 transition-opacity" style={{ color: '#F63440' }}>GrubHub</div>
+                <div className="text-xl font-bold hover:opacity-100 transition-opacity" style={{ color: '#FF8000' }}>GrubHub</div>
                 <div className="text-xl font-bold hover:opacity-100 transition-opacity" style={{ color: '#0066CC' }}>ChowNow</div>
-                <div className="text-xl font-bold hover:opacity-100 transition-opacity" style={{ color: '#E31837' }}>Slice</div>
+                <div className="text-xl font-bold hover:opacity-100 transition-opacity" style={{ color: '#FFD700' }}>Slice</div>
                 <div className="text-xl font-bold hover:opacity-100 transition-opacity" style={{ color: '#FF6B35' }}>Toast</div>
               </div>
             </div>
