@@ -8,7 +8,7 @@ import { CheckCircle, DollarSign, Users, MapPin, Volume2, VolumeX } from "lucide
 // Animated Character Components
 const AnimatedDeliveryDriver = ({ className = "", delay = 0 }: { className?: string; delay?: number }) => (
   <div className={`${className}`} style={{ animationDelay: `${delay}ms` }}>
-    <svg width="80" height="80" viewBox="0 0 80 80" className="animate-bounce">
+    <svg width="80" height="80" viewBox="0 0 80 80" className="animate-pulse">
       {/* Scooter */}
       <g>
         <circle cx="20" cy="60" r="8" fill="currentColor" opacity="0.8" />
@@ -17,13 +17,13 @@ const AnimatedDeliveryDriver = ({ className = "", delay = 0 }: { className?: str
         <rect x="35" y="30" width="15" height="25" rx="2" fill="currentColor" opacity="0.7" />
       </g>
       {/* Driver */}
-      <g className="animate-pulse">
+      <g>
         <circle cx="45" cy="25" r="8" fill="#FF6B35" />
         <rect x="40" y="30" width="10" height="20" rx="2" fill="#FF6B35" />
         <rect x="35" y="15" width="20" height="8" rx="4" fill="#4A90E2" />
       </g>
       {/* Food bag */}
-      <rect x="55" y="35" width="12" height="10" rx="2" fill="#FFD700" className="animate-pulse" />
+      <rect x="55" y="35" width="12" height="10" rx="2" fill="#FFD700" />
     </svg>
   </div>
 );
@@ -33,12 +33,12 @@ const AnimatedRestaurant = ({ className = "", delay = 0 }: { className?: string;
     <svg width="80" height="80" viewBox="0 0 80 80">
       {/* Building */}
       <rect x="15" y="30" width="50" height="40" rx="4" fill="currentColor" opacity="0.8" />
-      <rect x="20" y="35" width="10" height="8" rx="1" fill="#FFD700" className="animate-pulse" />
-      <rect x="35" y="35" width="10" height="8" rx="1" fill="#FFD700" className="animate-pulse" />
-      <rect x="50" y="35" width="10" height="8" rx="1" fill="#FFD700" className="animate-pulse" />
+      <rect x="20" y="35" width="10" height="8" rx="1" fill="#FFD700" />
+      <rect x="35" y="35" width="10" height="8" rx="1" fill="#FFD700" />
+      <rect x="50" y="35" width="10" height="8" rx="1" fill="#FFD700" />
       
       {/* Chef */}
-      <g className="animate-bounce" style={{ animationDelay: `${delay + 500}ms` }}>
+      <g>
         <circle cx="40" cy="20" r="6" fill="#FF6B35" />
         <rect x="37" y="10" width="6" height="8" rx="3" fill="white" />
         <rect x="35" y="25" width="10" height="15" rx="2" fill="white" />
@@ -55,7 +55,7 @@ const AnimatedCustomer = ({ className = "", delay = 0 }: { className?: string; d
   <div className={`${className}`} style={{ animationDelay: `${delay}ms` }}>
     <svg width="80" height="80" viewBox="0 0 80 80">
       {/* Customer */}
-      <g className="animate-pulse">
+      <g>
         <circle cx="40" cy="25" r="10" fill="#FF6B35" />
         <rect x="30" y="35" width="20" height="25" rx="3" fill="#4A90E2" />
         <rect x="25" y="45" width="8" height="15" rx="2" fill="#4A90E2" />
@@ -63,8 +63,8 @@ const AnimatedCustomer = ({ className = "", delay = 0 }: { className?: string; d
       </g>
       
       {/* Phone */}
-      <rect x="50" y="30" width="8" height="12" rx="2" fill="#333" className="animate-bounce" />
-      <rect x="51" y="31" width="6" height="8" rx="1" fill="#FFD700" className="animate-pulse" />
+      <rect x="50" y="30" width="8" height="12" rx="2" fill="#333" />
+      <rect x="51" y="31" width="6" height="8" rx="1" fill="#FFD700" />
     </svg>
   </div>
 );
@@ -299,8 +299,8 @@ const AnimatedVideo = () => {
                   </div>
                 </div>
                 <div className="bg-white p-4 rounded-lg shadow-warm">
-                  <p className="text-primary font-semibold">15% Marketing Only</p>
-                  <p className="text-sm text-muted-foreground">No delivery commission</p>
+                  <p className="text-primary font-semibold">Up to 50% Lower Costs</p>
+                  <p className="text-sm text-muted-foreground">Reduced delivery commission</p>
                 </div>
               </div>
             </div>
@@ -352,7 +352,7 @@ const AnimatedVideo = () => {
             {/* Benefits Strip */}
             <div className={`mt-12 text-center transition-all duration-1000 delay-2500 ${isPlaying ? 'animate-scale-in' : ''}`}>
               <div className="bg-white p-4 rounded-lg shadow-warm inline-block">
-                <p className="text-primary font-bold">No Third-Party Fees • Full Control • Higher Profits</p>
+                <p className="text-primary font-bold">Reduced Commission • Full Control • Higher Profits</p>
               </div>
             </div>
           </div>
