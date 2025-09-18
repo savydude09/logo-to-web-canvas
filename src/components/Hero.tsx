@@ -1,15 +1,28 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, TrendingDown, Users, Clock } from "lucide-react";
 import driverImage from "@/assets/delivery-driver-themed.png";
+import AnimatedVideo from "@/components/AnimatedVideo";
+
 const Hero = () => {
-  return <section id="home" className="relative min-h-[90vh] flex items-center bg-gradient-warm overflow-hidden">
+  return (
+    <section id="home" className="relative bg-gradient-warm overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2260%22%20height=%2260%22%20viewBox=%220%200%2060%2060%22%20xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg%20fill=%22none%22%20fill-rule=%22evenodd%22%3E%3Cg%20fill=%22%23ff6b35%22%20fill-opacity=%220.05%22%3E%3Ccircle%20cx=%2230%22%20cy=%2230%22%20r=%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
       
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      {/* Animated Video Section */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-16 relative z-10">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">See How You Save</h2>
+          <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">Watch our interactive demo showing the cost difference between DoorDash/GrubHub and your own drivers</p>
+          <AnimatedVideo />
+        </div>
+      </div>
+
+      {/* Main Hero Content */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
-          <div className="space-y-8">
+          <div className="space-y-8 lg:order-2">
             <div className="space-y-4">
               <div className="inline-flex items-center px-4 py-2 bg-primary/10 rounded-full text-sm font-medium text-primary">
                 <TrendingDown className="h-4 w-4 mr-2" />
@@ -58,8 +71,6 @@ const Hero = () => {
                 Get Started Today
                 <ArrowRight className="h-5 w-5 ml-2" />
               </Button>
-              
-              
             </div>
 
             {/* Trust indicators */}
@@ -76,25 +87,36 @@ const Hero = () => {
           </div>
 
           {/* Visual */}
-          <div className="relative lg:order-first">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-sunset rounded-3xl transform rotate-3 opacity-20"></div>
-              <div className="relative bg-background rounded-3xl p-4 shadow-warm overflow-hidden">
+          <div className="relative lg:order-1">
+            <div className="relative max-w-lg mx-auto">
+              <div className="absolute inset-0 bg-gradient-sunset rounded-3xl transform rotate-2 opacity-20 scale-105"></div>
+              <div className="absolute inset-0 bg-gradient-primary rounded-3xl transform -rotate-1 opacity-10 scale-110"></div>
+              <div className="relative bg-background rounded-3xl p-6 shadow-warm overflow-hidden border border-primary/10">
+                <div className="absolute top-4 right-4 w-3 h-3 bg-primary rounded-full animate-pulse"></div>
+                <div className="absolute top-4 right-8 w-2 h-2 bg-accent rounded-full animate-pulse delay-300"></div>
                 <img
                   src={driverImage}
-                  alt="Delivery driver holding pizza boxes and coffee cups with Hello, Your food is here message"
-                  className="w-full h-auto rounded-2xl object-cover"
+                  alt="Professional delivery driver in branded uniform holding pizza boxes and beverages, representing reliable food delivery service"
+                  className="w-full h-auto rounded-2xl object-cover shadow-lg transform hover:scale-105 transition-transform duration-300"
                   decoding="async"
                   fetchPriority="high"
                   onError={(e) => {
                     e.currentTarget.src = '/placeholder.svg';
                   }}
                 />
+                <div className="absolute bottom-6 left-6 right-6 bg-background/95 backdrop-blur-sm rounded-xl p-3 border border-primary/20">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-sm font-medium text-foreground">Driver En Route</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default Hero;

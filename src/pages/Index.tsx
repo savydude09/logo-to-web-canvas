@@ -12,13 +12,6 @@ const Index = () => {
       <Header />
       <main>
         <Hero />
-        <section className="py-16 px-4 bg-background">
-          <div className="max-w-6xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-4">See How You Save</h2>
-            <p className="text-muted-foreground mb-8">Watch our interactive demo showing the cost difference between DoorDash/GrubHub and your own drivers</p>
-            <AnimatedVideo />
-          </div>
-        </section>
         <Benefits />
         <Services />
         <Contact />
