@@ -73,7 +73,7 @@ const AnimatedCustomer = ({ className = "", delay = 0 }: { className?: string; d
 const voiceOverScript = [
   {
     scene: 0,
-    text: "Welcome to Savory Synergy - the solution that cuts your delivery costs in half.",
+    text: "Welcome to Savory Synergy - the solution that lowers your delivery commission up to 50%",
     duration: 3000
   },
   {
