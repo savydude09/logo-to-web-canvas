@@ -98,7 +98,7 @@ const Hero = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-20 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground animate-fade-in">See How You Save</h2>
-            <p className="text-muted-foreground mb-12 max-w-2xl mx-auto text-lg animate-fade-in">Watch Our Interactive Demo To See How You Save On Delivery</p>
+            
             <div className="animate-scale-in">
               <AnimatedVideo />
             </div>
