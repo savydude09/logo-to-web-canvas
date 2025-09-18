@@ -74,7 +74,7 @@ const Hero = () => {
                 color: '#0066CC'
               }}>ChowNow</div>
                 <div className="text-xl font-bold hover:opacity-100 transition-opacity" style={{
-                color: '#FFD700'
+                color: '#F5A623'
               }}>Slice</div>
                 <div className="text-xl font-bold hover:opacity-100 transition-opacity" style={{
                 color: '#FF6B35'
