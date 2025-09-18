@@ -76,7 +76,7 @@ const voiceOverScript = [
   },
   {
     scene: 1,
-    text: "Right now, platforms like DoorDash and GrubHub charge you 30% in total fees - that's 15% for marketing plus 15% for delivery. With Savory Synergy, you reduce your delivery commission by up to 50%, saving the average restaurant $15,000 to $40,000 per year.",
+    text: "Right now, platforms like DoorDash and GrubHub charge you 30% in total fees - that's 15% for marketing plus 15% for delivery. With Savory Synergy, you reduce your delivery commission by up to 50%, saving restaurants anywhere from $3,000 to $50,000 per year depending on your delivery volume.",
     duration: 8000
   },
   {
