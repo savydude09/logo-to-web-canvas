@@ -15,7 +15,7 @@ const Hero = () => {
             <div className="space-y-6">
               <div className="inline-flex items-center px-6 py-3 bg-primary/10 rounded-full text-sm font-medium text-primary border border-primary/20">
                 <TrendingDown className="h-4 w-4 mr-2" />
-                Save Up to 50% on Delivery Costs
+                Save Up to 50% on Delivery Commissions
               </div>
               
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-foreground leading-tight">
