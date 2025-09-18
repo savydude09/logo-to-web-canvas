@@ -2,10 +2,8 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, TrendingDown, Users, Clock } from "lucide-react";
 import driverImage from "@/assets/delivery-driver-themed.png";
 import AnimatedVideo from "@/components/AnimatedVideo";
-
 const Hero = () => {
-  return (
-    <section id="home" className="relative bg-gradient-warm overflow-hidden">
+  return <section id="home" className="relative bg-gradient-warm overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2260%22%20height=%2260%22%20viewBox=%220%200%2060%2060%22%20xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg%20fill=%22none%22%20fill-rule=%22evenodd%22%3E%3Cg%20fill=%22%23ff6b35%22%20fill-opacity=%220.05%22%3E%3Ccircle%20cx=%2230%22%20cy=%2230%22%20r=%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
       
@@ -85,16 +83,9 @@ const Hero = () => {
               <div className="relative bg-background rounded-3xl p-6 shadow-warm overflow-hidden border border-primary/10">
                 <div className="absolute top-4 right-4 w-3 h-3 bg-primary rounded-full animate-pulse"></div>
                 <div className="absolute top-4 right-8 w-2 h-2 bg-accent rounded-full animate-pulse delay-300"></div>
-                <img
-                  src={driverImage}
-                  alt="Professional delivery driver in branded uniform holding pizza boxes and beverages, representing reliable food delivery service"
-                  className="w-full h-auto rounded-2xl object-cover shadow-lg transform hover:scale-105 transition-transform duration-300"
-                  decoding="async"
-                  fetchPriority="high"
-                  onError={(e) => {
-                    e.currentTarget.src = '/placeholder.svg';
-                  }}
-                />
+                <img src={driverImage} alt="Professional delivery driver in branded uniform holding pizza boxes and beverages, representing reliable food delivery service" className="w-full h-auto rounded-2xl object-cover shadow-lg transform hover:scale-105 transition-transform duration-300" decoding="async" fetchPriority="high" onError={e => {
+                e.currentTarget.src = '/placeholder.svg';
+              }} />
               </div>
             </div>
           </div>
@@ -107,15 +98,13 @@ const Hero = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-20 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground animate-fade-in">See How You Save</h2>
-            <p className="text-muted-foreground mb-12 max-w-2xl mx-auto text-lg animate-fade-in">Watch our interactive demo showing the cost difference between DoorDash/GrubHub and your own drivers</p>
+            <p className="text-muted-foreground mb-12 max-w-2xl mx-auto text-lg animate-fade-in">Watch Our Interactive Demo To See How You Save On Delivery</p>
             <div className="animate-scale-in">
               <AnimatedVideo />
             </div>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;
