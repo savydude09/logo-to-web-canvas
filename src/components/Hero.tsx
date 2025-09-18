@@ -23,7 +23,7 @@ const Hero = () => {
                 <span className="bg-gradient-sunset bg-clip-text text-transparent">
                   Delivery Commissions
                 </span>{" "}
-                by 50%
+                upto 50%
               </h1>
               
               <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
