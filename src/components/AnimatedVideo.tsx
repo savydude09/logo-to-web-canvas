@@ -101,6 +101,7 @@ const AnimatedVideo = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [audioEnabled, setAudioEnabled] = useState(false);
   const [isVoiceAvailable, setIsVoiceAvailable] = useState(false);
+  const [currentUtterance, setCurrentUtterance] = useState<SpeechSynthesisUtterance | null>(null);
 
   // Check if speech synthesis is available
   useEffect(() => {
@@ -110,19 +111,36 @@ const AnimatedVideo = () => {
   }, []);
 
   const scenes = [
-    { id: 0, duration: 3000, name: "intro" },
-    { id: 1, duration: 8000, name: "comparison" },
-    { id: 2, duration: 12000, name: "process" },
-    { id: 3, duration: 10000, name: "benefits" },
-    { id: 4, duration: 5000, name: "cta" }
+    { id: 0, duration: 4000, name: "intro" },
+    { id: 1, duration: 12000, name: "comparison" },
+    { id: 2, duration: 15000, name: "process" },
+    { id: 3, duration: 12000, name: "benefits" },
+    { id: 4, duration: 6000, name: "cta" }
   ];
+
+  // Advance to next scene
+  const advanceToNextScene = () => {
+    if (currentScene < scenes.length - 1) {
+      setCurrentScene(currentScene + 1);
+    } else {
+      setIsPlaying(false);
+      setCurrentScene(0);
+    }
+  };
 
   // Play voice over using Web Speech API
   const playVoiceOver = (sceneIndex: number) => {
-    if (!audioEnabled || !isVoiceAvailable || typeof window === 'undefined') return;
+    if (!audioEnabled || !isVoiceAvailable || typeof window === 'undefined') {
+      // If no audio, use fallback timer
+      setTimeout(advanceToNextScene, scenes[sceneIndex].duration);
+      return;
+    }
     
     const script = voiceOverScript[sceneIndex];
-    if (!script) return;
+    if (!script) {
+      setTimeout(advanceToNextScene, scenes[sceneIndex].duration);
+      return;
+    }
 
     // Stop any existing speech
     window.speechSynthesis.cancel();
@@ -135,6 +153,18 @@ const AnimatedVideo = () => {
       utterance.pitch = 1.0;
       utterance.volume = 1.0;
       
+      // Set up event listeners
+      utterance.onend = () => {
+        setCurrentUtterance(null);
+        advanceToNextScene();
+      };
+      
+      utterance.onerror = () => {
+        setCurrentUtterance(null);
+        // Fallback to timer if speech fails
+        setTimeout(advanceToNextScene, scenes[sceneIndex].duration);
+      };
+      
       // Try to use a more natural voice if available
       const voices = window.speechSynthesis.getVoices();
       const preferredVoice = voices.find(voice => 
@@ -146,36 +176,31 @@ const AnimatedVideo = () => {
         utterance.voice = preferredVoice;
       }
 
+      setCurrentUtterance(utterance);
       window.speechSynthesis.speak(utterance);
     } catch (error) {
       console.error('Error playing voice over:', error);
+      // Fallback to timer if speech fails
+      setTimeout(advanceToNextScene, scenes[sceneIndex].duration);
     }
   };
 
   useEffect(() => {
     if (!isPlaying) return;
 
-    // Play voice over for current scene
-    if (audioEnabled && currentScene < voiceOverScript.length) {
-      playVoiceOver(currentScene);
-    }
+    // Play voice over for current scene (which will handle scene advancement)
+    playVoiceOver(currentScene);
 
-    const timer = setTimeout(() => {
-      if (currentScene < scenes.length - 1) {
-        setCurrentScene(currentScene + 1);
-      } else {
-        setIsPlaying(false);
-        setCurrentScene(0);
-      }
-    }, scenes[currentScene].duration);
-
+    // Cleanup function
     return () => {
-      clearTimeout(timer);
       if (typeof window !== 'undefined' && window.speechSynthesis) {
         window.speechSynthesis.cancel();
       }
+      if (currentUtterance) {
+        setCurrentUtterance(null);
+      }
     };
-  }, [currentScene, isPlaying, audioEnabled, scenes]);
+  }, [currentScene, isPlaying]); // Removed audioEnabled from dependencies to prevent restart
 
   const startAnimation = () => {
     setIsPlaying(true);
@@ -187,6 +212,9 @@ const AnimatedVideo = () => {
     setCurrentScene(0);
     if (typeof window !== 'undefined' && window.speechSynthesis) {
       window.speechSynthesis.cancel();
+    }
+    if (currentUtterance) {
+      setCurrentUtterance(null);
     }
   };
 
