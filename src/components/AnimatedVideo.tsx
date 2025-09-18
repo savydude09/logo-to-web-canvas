@@ -76,12 +76,12 @@ const voiceOverScript = [
   },
   {
     scene: 1,
-    text: "Right now, platforms like DoorDash and GrubHub charge you 30% in total fees - that's 15% for marketing plus 15% for delivery. With Savory Synergy, you keep receiving orders from apps, your website, and POS system the same way for deliveries and you get paid the same way, but fulfill deliveries through our partner network of drivers, reducing your delivery commission by up to 50%.",
+    text: "Right now, platforms like DoorDash and GrubHub charge you 30% in total fees - that's 15% for marketing plus 15% for delivery. With Savory Synergy, you reduce your delivery commission by up to 50%, saving the average restaurant $60,000 to $120,000 per year.",
     duration: 8000
   },
   {
     scene: 2,
-    text: "Here's how it works: Your customer places an order through DoorDash, GrubHub, your website or POS system for delivery and we get that order in our system at the same time as well. Your restaurant receives and prepares it, then our partner network of drivers pick up and deliver while you keep more money in your pocket.",
+    text: "Here's how seamless it is: Your customer places an order through DoorDash, GrubHub, your website or POS system for delivery and we get that order in our system at the same time. Your restaurant receives and prepares it exactly as you do now, then our partner network of drivers pick up and deliver. No changes to your operations, but significantly more money stays in your pocket.",
     duration: 12000
   },
   {
