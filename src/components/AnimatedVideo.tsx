@@ -81,7 +81,7 @@ const voiceOverScript = [
   },
   {
     scene: 2,
-    text: "Here's how it works: Your customer places an order through the app, your restaurant receives and prepares it, then your dedicated driver picks up and delivers - giving you complete control over the entire process.",
+    text: "Here's how it works: Your customer places an order through the app, your restaurant receives and prepares it, then our partner network of drivers pick up and deliver - giving you the entire process.",
     duration: 12000
   },
   {
@@ -328,14 +328,14 @@ const AnimatedVideo = () => {
               {/* Driver */}
               <div className={`text-center transition-all duration-1000 delay-2000 ${isPlaying ? 'animate-fade-in' : ''}`}>
                 <AnimatedDeliveryDriver className="text-primary" delay={2000} />
-                <p className="text-sm font-semibold text-warm-brown">Your Driver Delivers</p>
+                <p className="text-sm font-semibold text-warm-brown">Our Partner Network Delivers</p>
               </div>
             </div>
 
             {/* Benefits Strip */}
             <div className={`mt-12 text-center transition-all duration-1000 delay-2500 ${isPlaying ? 'animate-scale-in' : ''}`}>
               <div className="bg-white p-4 rounded-lg shadow-warm inline-block">
-                <p className="text-primary font-bold">Reduced Commission • Full Control • Higher Profits</p>
+                <p className="text-primary font-bold">Reduced Commission • Higher Profits</p>
               </div>
             </div>
           </div>
