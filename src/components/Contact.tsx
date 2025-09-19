@@ -63,7 +63,7 @@ const Contact = () => {
                   <h3 className="text-2xl font-heading font-bold text-foreground mb-4">
                     Start Saving Today
                   </h3>
-                  <p className="text-muted-foreground mb-6">Join the restaurants already saving money with our delivery network.</p>
+                  <p className="text-muted-foreground mb-6">Join the restaurants already saving money with our driver network.</p>
                 </div>
 
                 <div className="space-y-4">
