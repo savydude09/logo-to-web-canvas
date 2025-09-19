@@ -243,9 +243,9 @@ const AnimatedVideo = () => {
         {currentScene === 0 && (
           <div className="absolute inset-0 flex items-center justify-center bg-gradient-primary">
             <div className={`text-center transition-all duration-1000 ${isPlaying ? 'animate-fade-in' : ''}`}>
-              <h1 className="text-4xl font-logo text-white mb-4">
-                <span className="bg-gradient-sunset bg-clip-text text-transparent">Savory</span>{" "}
-                <span className="text-warm-cream">Synergy</span>
+              <h1 className="text-4xl font-logo text-white mb-4 drop-shadow-lg">
+                <span className="text-white font-bold text-shadow-lg">Savory</span>{" "}
+                <span className="bg-gradient-sunset bg-clip-text text-transparent font-bold">Synergy</span>
               </h1>
               <p className="text-xl text-white/90">Save Up to 50% on Delivery Commissions</p>
             </div>
