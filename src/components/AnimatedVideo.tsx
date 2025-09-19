@@ -142,9 +142,9 @@ const AnimatedVideo = () => {
     try {
       const utterance = new SpeechSynthesisUtterance(script.text);
       
-      // Configure voice settings
-      utterance.rate = 0.9; // Slightly slower for clarity
-      utterance.pitch = 1.0;
+      // Configure voice settings for upbeat delivery
+      utterance.rate = 1.1; // Slightly faster for energy
+      utterance.pitch = 1.2; // Higher pitch for enthusiasm
       utterance.volume = 1.0;
       
       // Set up event listeners
@@ -159,12 +159,14 @@ const AnimatedVideo = () => {
         setTimeout(advanceToNextScene, scenes[sceneIndex].duration);
       };
       
-      // Try to use a more natural voice if available
+      // Try to use an upbeat, energetic voice if available
       const voices = window.speechSynthesis.getVoices();
       const preferredVoice = voices.find(voice => 
+        voice.name.includes('Samantha') || // Upbeat female voice on Mac
+        voice.name.includes('Karen') ||    // Energetic voice on Windows
         voice.name.includes('Google') || 
         voice.name.includes('Microsoft') ||
-        voice.lang === 'en-US'
+        (voice.lang === 'en-US' && voice.name.includes('Female'))
       );
       if (preferredVoice) {
         utterance.voice = preferredVoice;
