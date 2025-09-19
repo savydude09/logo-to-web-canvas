@@ -96,7 +96,7 @@ const voiceOverScript = [
   },
   {
     scene: 2,
-    text: "Here's how seamless it is: Your customer places an order through DoorDash, GrubHub, your website or POS system for delivery. You receive and prepare the order exactly as you always do. We're automatically notified at the same time, so our drivers can head your way and arrive around when your food is typically ready. The result? You keep more money in your pocket.",
+    text: "Here's how seamless it is: Your customer places an order through DoorDash, GrubHub, your website or POS system for delivery. You receive and prepare the order exactly as you always do. We're automatically notified at the same time, so our drivers can head your way and arrive around when your food is typically ready to pick up and delivery. The result? You keep more money in your pocket.",
     duration: 12000
   },
   {
