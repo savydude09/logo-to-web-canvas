@@ -27,7 +27,7 @@ const Hero = () => {
                 up to 50%
               </h1>
               
-              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">Partner with Savory Synergy to keep receiving orders from DoorDash, GrubHub, and other platforms while using our partner driver network for delivery.</p>
+              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">Partner with Savory Synergy to keep receiving orders from DoorDash, GrubHub, your website & POS system the same way while using our partner driver network for delivery.</p>
             </div>
 
             {/* Features */}
