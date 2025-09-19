@@ -112,6 +112,23 @@ const AnimatedVideo = () => {
   const [audioEnabled, setAudioEnabled] = useState(false);
   const [isVoiceAvailable, setIsVoiceAvailable] = useState(false);
   const [currentUtterance, setCurrentUtterance] = useState<SpeechSynthesisUtterance | null>(null);
+  const [backgroundMusic, setBackgroundMusic] = useState<HTMLAudioElement | null>(null);
+  const [musicEnabled, setMusicEnabled] = useState(true);
+
+  // Initialize background music
+  useEffect(() => {
+    const audio = new Audio();
+    // You can add your own background music file here
+    // audio.src = '/path-to-your-music.mp3';
+    audio.loop = true;
+    audio.volume = 0.3; // Low volume to not overpower narration
+    setBackgroundMusic(audio);
+    
+    return () => {
+      audio.pause();
+      audio.src = '';
+    };
+  }, []);
 
   // Check if speech synthesis is available
   useEffect(() => {
@@ -319,6 +336,12 @@ const AnimatedVideo = () => {
   const startAnimation = () => {
     setIsPlaying(true);
     setCurrentScene(0);
+    
+    // Start background music if available and enabled
+    if (backgroundMusic && musicEnabled) {
+      backgroundMusic.currentTime = 0;
+      backgroundMusic.play().catch(console.log);
+    }
   };
 
   const stopAnimation = () => {
@@ -330,10 +353,29 @@ const AnimatedVideo = () => {
     if (currentUtterance) {
       setCurrentUtterance(null);
     }
+    
+    // Stop background music
+    if (backgroundMusic) {
+      backgroundMusic.pause();
+      backgroundMusic.currentTime = 0;
+    }
   };
 
   const toggleAudio = () => {
     setAudioEnabled(!audioEnabled);
+  };
+
+  const toggleMusic = () => {
+    const newMusicEnabled = !musicEnabled;
+    setMusicEnabled(newMusicEnabled);
+    
+    if (backgroundMusic) {
+      if (newMusicEnabled && isPlaying) {
+        backgroundMusic.play().catch(console.log);
+      } else {
+        backgroundMusic.pause();
+      }
+    }
   };
 
   const goToPreviousScene = () => {
@@ -508,18 +550,28 @@ const AnimatedVideo = () => {
             size="sm"
             className="bg-white/20 border-white/30 text-white hover:bg-white/30"
             disabled={!isVoiceAvailable}
-          >
-            {audioEnabled ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
-          </Button>
-          
-          <Button 
-            onClick={isPlaying ? stopAnimation : startAnimation}
-            variant="outline" 
-            size="sm"
-            className="bg-white/20 border-white/30 text-white hover:bg-white/30"
-          >
-            {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
-          </Button>
+            >
+              {audioEnabled ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
+            </Button>
+            
+            <Button 
+              onClick={toggleMusic} 
+              variant="outline" 
+              size="sm"
+              className="bg-white/20 border-white/30 text-white hover:bg-white/30"
+              title={musicEnabled ? "Disable background music" : "Enable background music"}
+            >
+              🎵
+            </Button>
+            
+            <Button 
+              onClick={isPlaying ? stopAnimation : startAnimation}
+              variant="outline" 
+              size="sm"
+              className="bg-white/20 border-white/30 text-white hover:bg-white/30"
+            >
+              {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+            </Button>
         </div>
 
         {/* Progress Bar */}
@@ -544,13 +596,34 @@ const AnimatedVideo = () => {
 
       {/* TTS Setup Info */}
       <Card className="p-4 bg-muted/50">
-        <div className="space-y-3">
-          <p className="text-sm font-medium">🎙️ Voice Quality Options:</p>
-          <div className="text-xs text-muted-foreground space-y-1">
-            <p><strong>Premium:</strong> Add OpenAI API key below for natural voice</p>
-            <p><strong>Good:</strong> ResponsiveVoice (loads automatically)</p>
-            <p><strong>Basic:</strong> Browser speech synthesis</p>
-          </div>
+          <div className="space-y-3">
+            <p className="text-sm font-medium">🎙️ Voice Quality Options:</p>
+            <div className="text-xs text-muted-foreground space-y-1">
+              <p><strong>Premium:</strong> Add OpenAI API key below for natural voice</p>
+              <p><strong>Good:</strong> ResponsiveVoice (loads automatically)</p>
+              <p><strong>Basic:</strong> Browser speech synthesis</p>
+            </div>
+            
+            {/* Background Music Upload */}
+            <div className="pt-2 border-t">
+              <p className="text-sm font-medium mb-2">🎵 Background Music:</p>
+              <input
+                type="file"
+                accept="audio/*"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file && backgroundMusic) {
+                    const url = URL.createObjectURL(file);
+                    backgroundMusic.src = url;
+                    backgroundMusic.load();
+                  }
+                }}
+                className="text-xs w-full"
+              />
+              <p className="text-xs text-muted-foreground mt-1">
+                Upload an upbeat royalty-free track (MP3, WAV, etc.)
+              </p>
+            </div>
           
           {/* OpenAI API Key Input */}
           <div className="flex gap-2">
