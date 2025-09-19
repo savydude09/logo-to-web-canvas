@@ -189,8 +189,8 @@ const AnimatedVideo = () => {
           body: JSON.stringify({
             model: 'tts-1',
             input: text,
-            voice: 'nova', // Natural, upbeat voice
-            speed: 1.15
+            voice: 'alloy', // More energetic and upbeat than nova
+            speed: 1.3 // Faster for more energy
           }),
         });
 
@@ -240,8 +240,8 @@ const AnimatedVideo = () => {
       if (window.responsiveVoice) {
         try {
           window.responsiveVoice.speak(text, "US English Female", {
-            rate: 1.1,
-            pitch: 1.2,
+            rate: 1.4,    // Much faster for energy
+            pitch: 1.5,   // Higher pitch for enthusiasm  
             volume: 1,
             onend: () => advanceToNextScene(),
             onerror: () => useWebSpeechAPI(text)
@@ -262,9 +262,9 @@ const AnimatedVideo = () => {
 
       const utterance = new SpeechSynthesisUtterance(text);
       
-      // Enhanced voice settings for more dynamic delivery
-      utterance.rate = 1.25;   // Faster for energy
-      utterance.pitch = 1.4;   // Higher for enthusiasm
+      // Enhanced voice settings for maximum energy and enthusiasm
+      utterance.rate = 1.4;    // Much faster 
+      utterance.pitch = 1.6;   // Very high pitch for excitement
       utterance.volume = 1.0;
       
       utterance.onend = () => {
