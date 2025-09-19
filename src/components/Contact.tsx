@@ -77,7 +77,7 @@ const Contact = () => {
 
                 <div className="pt-4 border-t border-border/20">
                   <p className="text-sm text-muted-foreground">
-                    💡 <strong>Quick Start:</strong> Most restaurants are onboarded within 24-48 hours
+                    💡 <strong>Quick Start:</strong> Most restaurants are onboarded within 2-3 business days
                   </p>
                 </div>
               </div>
