@@ -19,11 +19,12 @@ const Hero = () => {
               </div>
               
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-foreground leading-tight">
-                Restaurant Owners Reduce Your{" "}
+                Restaurant Owners,<br />
+                Reduce Your{" "}
                 <span className="bg-gradient-sunset bg-clip-text text-transparent">
                   Delivery Commissions
                 </span>{" "}
-                upto 50%
+                up to 50%
               </h1>
               
               <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">Partner with Savory Synergy to keep receiving orders from DoorDash, GrubHub, and other platforms while using our partner driver network for delivery.</p>
