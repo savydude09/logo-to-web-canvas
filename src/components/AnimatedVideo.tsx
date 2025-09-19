@@ -3,6 +3,21 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, DollarSign, Users, MapPin, Volume2, VolumeX, Play, Pause, ChevronLeft, ChevronRight } from "lucide-react";
 
+// Type declarations for external libraries
+declare global {
+  interface Window {
+    responsiveVoice?: {
+      speak: (text: string, voice: string, options: {
+        rate?: number;
+        pitch?: number;
+        volume?: number;
+        onend?: () => void;
+        onerror?: () => void;
+      }) => void;
+    };
+  }
+}
+
 // Animated Character Components
 const AnimatedDeliveryDriver = ({ className = "", delay = 0 }: { className?: string; delay?: number }) => (
   <div className={`${className}`} style={{ animationDelay: `${delay}ms` }}>
@@ -122,10 +137,9 @@ const AnimatedVideo = () => {
     }
   };
 
-  // Play voice over using Web Speech API
-  const playVoiceOver = (sceneIndex: number) => {
-    if (!audioEnabled || !isVoiceAvailable || typeof window === 'undefined') {
-      // If no audio, use fallback timer
+  // Advanced TTS with multiple provider support
+  const playVoiceOver = async (sceneIndex: number) => {
+    if (!audioEnabled || typeof window === 'undefined') {
       setTimeout(advanceToNextScene, scenes[sceneIndex].duration);
       return;
     }
@@ -137,17 +151,122 @@ const AnimatedVideo = () => {
     }
 
     // Stop any existing speech
-    window.speechSynthesis.cancel();
+    if (window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
 
     try {
-      const utterance = new SpeechSynthesisUtterance(script.text);
+      // Try OpenAI TTS first (if API key is available)
+      const openaiApiKey = localStorage.getItem('openai_api_key');
+      if (openaiApiKey && await tryOpenAITTS(script.text)) {
+        return;
+      }
+
+      // Try ResponsiveVoice (free alternative)
+      if (await tryResponsiveVoice(script.text)) {
+        return;
+      }
+
+      // Fallback to enhanced Web Speech API
+      useWebSpeechAPI(script.text);
+
+    } catch (error) {
+      console.error('Error playing voice over:', error);
+      setTimeout(advanceToNextScene, scenes[sceneIndex].duration);
+    }
+
+    async function tryOpenAITTS(text: string): Promise<boolean> {
+      try {
+        const apiKey = localStorage.getItem('openai_api_key');
+        if (!apiKey) return false;
+        
+        const response = await fetch('https://api.openai.com/v1/audio/speech', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${apiKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            model: 'tts-1',
+            input: text,
+            voice: 'nova', // Natural, upbeat voice
+            speed: 1.15
+          }),
+        });
+
+        if (response.ok) {
+          const audioBlob = await response.blob();
+          const audioUrl = URL.createObjectURL(audioBlob);
+          const audio = new Audio(audioUrl);
+          
+          audio.onended = () => {
+            URL.revokeObjectURL(audioUrl);
+            advanceToNextScene();
+          };
+          
+          audio.onerror = () => {
+            URL.revokeObjectURL(audioUrl);
+            useWebSpeechAPI(text);
+          };
+          
+          await audio.play();
+          return true;
+        }
+      } catch (error) {
+        console.log('OpenAI TTS failed, trying next option');
+      }
+      return false;
+    }
+
+    async function tryResponsiveVoice(text: string): Promise<boolean> {
+      // Load ResponsiveVoice if not already loaded
+      if (!window.responsiveVoice) {
+        try {
+          const script = document.createElement('script');
+          script.src = 'https://code.responsivevoice.org/responsivevoice.js?key=free';
+          document.head.appendChild(script);
+          
+          // Wait for it to load
+          await new Promise((resolve, reject) => {
+            script.onload = resolve;
+            script.onerror = reject;
+            setTimeout(reject, 3000); // 3 second timeout
+          });
+        } catch (error) {
+          return false;
+        }
+      }
+
+      if (window.responsiveVoice) {
+        try {
+          window.responsiveVoice.speak(text, "US English Female", {
+            rate: 1.1,
+            pitch: 1.2,
+            volume: 1,
+            onend: () => advanceToNextScene(),
+            onerror: () => useWebSpeechAPI(text)
+          });
+          return true;
+        } catch (error) {
+          console.log('ResponsiveVoice failed, using Web Speech API');
+        }
+      }
+      return false;
+    }
+
+    function useWebSpeechAPI(text: string) {
+      if (!isVoiceAvailable) {
+        setTimeout(advanceToNextScene, scenes[sceneIndex].duration);
+        return;
+      }
+
+      const utterance = new SpeechSynthesisUtterance(text);
       
-      // Configure voice settings for upbeat delivery
-      utterance.rate = 1.1; // Slightly faster for energy
-      utterance.pitch = 1.2; // Higher pitch for enthusiasm
+      // Enhanced voice settings for more dynamic delivery
+      utterance.rate = 1.25;   // Faster for energy
+      utterance.pitch = 1.4;   // Higher for enthusiasm
       utterance.volume = 1.0;
       
-      // Set up event listeners
       utterance.onend = () => {
         setCurrentUtterance(null);
         advanceToNextScene();
@@ -155,29 +274,28 @@ const AnimatedVideo = () => {
       
       utterance.onerror = () => {
         setCurrentUtterance(null);
-        // Fallback to timer if speech fails
         setTimeout(advanceToNextScene, scenes[sceneIndex].duration);
       };
       
-      // Try to use an upbeat, energetic voice if available
+      // Find the best available voice
       const voices = window.speechSynthesis.getVoices();
       const preferredVoice = voices.find(voice => 
-        voice.name.includes('Samantha') || // Upbeat female voice on Mac
-        voice.name.includes('Karen') ||    // Energetic voice on Windows
-        voice.name.includes('Google') || 
-        voice.name.includes('Microsoft') ||
-        (voice.lang === 'en-US' && voice.name.includes('Female'))
+        // Try for most natural voices first
+        voice.name.includes('Google UK English Female') ||
+        voice.name.includes('Microsoft Zira') ||
+        voice.name.includes('Samantha') ||
+        voice.name.includes('Karen') ||
+        voice.name.includes('Serena') ||
+        voice.name.includes('Alex') ||
+        (voice.lang.startsWith('en') && voice.name.toLowerCase().includes('female'))
       );
+      
       if (preferredVoice) {
         utterance.voice = preferredVoice;
       }
 
       setCurrentUtterance(utterance);
       window.speechSynthesis.speak(utterance);
-    } catch (error) {
-      console.error('Error playing voice over:', error);
-      // Fallback to timer if speech fails
-      setTimeout(advanceToNextScene, scenes[sceneIndex].duration);
     }
   };
 
@@ -424,14 +542,52 @@ const AnimatedVideo = () => {
         </Card>
       )}
 
-      {/* Audio Info */}
-      {!isVoiceAvailable && (
-        <Card className="p-3 bg-muted/50">
-          <p className="text-xs text-muted-foreground text-center">
-            Text-to-speech not available in this browser
-          </p>
-        </Card>
-      )}
+      {/* TTS Setup Info */}
+      <Card className="p-4 bg-muted/50">
+        <div className="space-y-3">
+          <p className="text-sm font-medium">🎙️ Voice Quality Options:</p>
+          <div className="text-xs text-muted-foreground space-y-1">
+            <p><strong>Premium:</strong> Add OpenAI API key below for natural voice</p>
+            <p><strong>Good:</strong> ResponsiveVoice (loads automatically)</p>
+            <p><strong>Basic:</strong> Browser speech synthesis</p>
+          </div>
+          
+          {/* OpenAI API Key Input */}
+          <div className="flex gap-2">
+            <input
+              type="password"
+              placeholder="OpenAI API Key (optional)"
+              className="flex-1 px-3 py-2 text-xs border rounded"
+              onChange={(e) => {
+                if (e.target.value) {
+                  localStorage.setItem('openai_api_key', e.target.value);
+                } else {
+                  localStorage.removeItem('openai_api_key');
+                }
+              }}
+              defaultValue={localStorage.getItem('openai_api_key') || ''}
+            />
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => {
+                const input = document.querySelector('input[placeholder="OpenAI API Key (optional)"]') as HTMLInputElement;
+                input.value = '';
+                localStorage.removeItem('openai_api_key');
+              }}
+              className="text-xs"
+            >
+              Clear
+            </Button>
+          </div>
+          
+          {!isVoiceAvailable && (
+            <p className="text-xs text-muted-foreground">
+              ⚠️ Browser speech synthesis not available
+            </p>
+          )}
+        </div>
+      </Card>
     </div>
   );
 };
