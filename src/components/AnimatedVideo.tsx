@@ -86,7 +86,7 @@ const voiceOverScript = [
   },
   {
     scene: 3,
-    text: "Ready to reduce your delivery commission by up to 50% and take control of your delivery operations? Get started today and join restaurants saving thousands.",
+    text: "Ready to reduce your delivery commission by up to 50% and keep more of your money? Get started today and join restaurants saving thousands.",
     duration: 5000
   }
 ];
