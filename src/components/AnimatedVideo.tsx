@@ -245,7 +245,7 @@ const AnimatedVideo = () => {
             <div className={`text-center transition-all duration-1000 ${isPlaying ? 'animate-fade-in' : ''}`}>
               <h1 className="text-4xl font-logo text-white mb-4 drop-shadow-lg">
                 <span className="text-white font-bold text-shadow-lg">Savory</span>{" "}
-                <span className="bg-gradient-sunset bg-clip-text text-transparent font-bold">Synergy</span>
+                <span className="text-white font-bold text-shadow-lg">Synergy</span>
               </h1>
               <p className="text-xl text-white/90">Save Up to 50% on Delivery Commissions</p>
             </div>
