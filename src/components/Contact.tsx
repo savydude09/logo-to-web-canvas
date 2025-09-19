@@ -50,9 +50,6 @@ const Contact = () => {
                 </CardContent>
               </Card>
 
-              <Card className="hover:shadow-warm transition-all duration-300 border-border/50">
-                
-              </Card>
             </div>
 
             {/* CTA Section */}

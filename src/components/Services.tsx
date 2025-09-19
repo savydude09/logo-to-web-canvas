@@ -35,7 +35,7 @@ const Services = () => {
                 <div className="flex items-center space-x-3 p-4 bg-warm-cream rounded-xl">
                   <TrendingUp className="h-6 w-6 text-primary flex-shrink-0" />
                   <div>
-                    <div className="font-semibold text-foreground">Save 30-50% on commissions</div>
+                    <div className="font-semibold text-foreground">Save up to 50% on commissions</div>
                     <div className="text-sm text-muted-foreground">Compared to standard platform fees</div>
                   </div>
                 </div>

@@ -33,11 +33,6 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#drivers" className="text-warm-cream/80 hover:text-warm-cream transition-colors text-sm">
-                  For Drivers
-                </a>
-              </li>
-              <li>
                 <a href="#contact" className="text-warm-cream/80 hover:text-warm-cream transition-colors text-sm">
                   Contact
                 </a>
