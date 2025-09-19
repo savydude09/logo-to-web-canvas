@@ -112,7 +112,6 @@ const Benefits = () => {
                     "Seamless integration with existing platforms",
                     "Reliable and professional drivers",
                     "Real-time tracking and updates",
-                    "24/7 customer support",
                     "Transparent pricing structure"
                   ].map((point, index) => (
                     <li key={index} className="flex items-start space-x-3">
