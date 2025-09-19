@@ -33,9 +33,6 @@ const Header = () => {
             <a href="#restaurants" className="text-foreground hover:text-primary transition-colors font-medium">
               For Restaurants
             </a>
-            <a href="#drivers" className="text-foreground hover:text-primary transition-colors font-medium">
-              For Drivers
-            </a>
             <a href="#contact" className="text-foreground hover:text-primary transition-colors font-medium">
               Contact
             </a>
@@ -83,13 +80,6 @@ const Header = () => {
                 onClick={toggleMenu}
               >
                 For Restaurants
-              </a>
-              <a 
-                href="#drivers" 
-                className="text-foreground hover:text-primary transition-colors font-medium py-2"
-                onClick={toggleMenu}
-              >
-                For Drivers
               </a>
               <a 
                 href="#contact" 
