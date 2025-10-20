@@ -110,7 +110,6 @@ const Benefits = () => {
                 <ul className="space-y-3">
                   {[
                     "Seamless integration with existing platforms",
-                    "Reliable and professional drivers",
                     "Real-time tracking and updates",
                     "Transparent pricing structure"
                   ].map((point, index) => (
