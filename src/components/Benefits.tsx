@@ -91,7 +91,7 @@ const Benefits = () => {
                   {[
                     "Continue receiving orders exactly as before",
                     "Keep your existing POS system integration",
-                    "Use our driver network for delivery",
+                    "Use flexible delivery",
                     "Save up to 50% on commission fees",
                     "No changes to your customer experience"
                   ].map((point, index) => (
