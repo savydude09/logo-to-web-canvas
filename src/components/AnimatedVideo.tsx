@@ -109,7 +109,7 @@ const voiceOverScript = [{
   duration: 8000
 }, {
   scene: 2,
-  text: "Here's how seamless it is: Your customer places an order through DoorDash or GrubHub for delivery. You receive and prepare the order exactly as you always do. Through our flexible delivery network, we handle fulfillment—whether using our own drivers or coordinating with existing platforms. The result? You keep more money in your pocket.",
+  text: "Here's how seamless it is: Your customer places an order through DoorDash or GrubHub for delivery. You receive and prepare the order exactly as you always do. Through our flexible delivery network, we can still have DoorDash or GrubHub fulfill deliveries when needed. The result? You keep more money in your pocket.",
   duration: 12000
 }, {
   scene: 3,
