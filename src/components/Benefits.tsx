@@ -90,7 +90,6 @@ const Benefits = () => {
                 <ul className="space-y-3">
                   {[
                     "Continue receiving orders exactly as before",
-                    "Keep your existing POS system integration",
                     "Use flexible delivery",
                     "Save up to 50% on commission fees",
                     "No changes to your customer experience"
